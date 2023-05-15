@@ -11,12 +11,110 @@
     <modules>
         <module>core</module>
         <module>ignite-javax.persistence-mapper</module>
+        <module>ignite-javax.persistence-sample</module>
     </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--versions-->
+        <ignite.version>2.14.0</ignite.version>
+        <ignite.ext.version>1.0.0</ignite.ext.version>
+        <junit.version>4.13.2</junit.version>
+        <spring.data.version>2.7.10</spring.data.version>
+        <hibernate.version>5.6.15.Final</hibernate.version>
+
+        <argLine>
+--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED
+--add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED
+--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED
+--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED
+--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED
+--illegal-access=permit
+        </argLine>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--project-->
+            <dependency>
+                <groupId>kr.nerdlab</groupId>
+                <artifactId>ignite-javax.persistence-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>kr.nerdlab</groupId>
+                <artifactId>ignite-javax.persistence-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--junit-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!--ignite-->
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-core</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-indexing</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-slf4j</artifactId>
+                <version>${ignite.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-spring</artifactId>
+                <version>${ignite.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.ignite</groupId>
+                <artifactId>ignite-spring-data-2.2-ext</artifactId>
+                <version>${ignite.ext.version}</version>
+            </dependency>
+
+            <!--spring for ignite-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${spring.data.version}</version>
+            </dependency>
+
+            <!--reflection utils for ignite-->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.10.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
